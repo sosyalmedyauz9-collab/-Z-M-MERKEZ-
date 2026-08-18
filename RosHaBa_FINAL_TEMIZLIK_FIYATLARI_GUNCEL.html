@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RosHaBa - İhtiyacınıza uygun hizmet, tek noktada.">
+<title>RosHaBa | İhtiyacınıza Uygun Hizmet</title>
+<style>
+:root{
+  --green:#087a4a;--green2:#0fa866;--green3:#dff7ea;
+  --gold:#c88b1d;--gold2:#e3b653;
+  --navy:#071a2f;--text:#172235;--muted:#6b7688;--white:#fff;
+  --bg:#f7f8fa;--line:#e7eaf0;--shadow:0 12px 35px rgba(14,28,45,.10);
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;color:var(--text);line-height:1.5}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.container{width:min(1440px,94%);margin:auto}
+
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:950;letter-spacing:-1px;color:var(--navy)}
+.logo-mark{width:44px;height:44px;border-radius:13px;background:linear-gradient(145deg,var(--green),#0b4c35);display:grid;place-items:center;color:#fff;font-weight:950;box-shadow:0 8px 20px rgba(8,122,74,.22)}
+.logo span{color:var(--gold)}
+.logo small{display:block;font-size:8px;letter-spacing:1.2px;color:#778195;font-weight:850;margin-top:-2px}
+nav{display:flex;gap:27px;margin-left:auto}
+nav a{font-size:14px;font-weight:800;color:#263145}
+nav a:hover{color:var(--green)}
+.nav-actions{display:flex;align-items:center;gap:9px}
+.nav-btn{border:1px solid var(--gold);border-radius:11px;padding:10px 15px;background:#fff;font-weight:850;color:var(--navy)}
+.nav-btn.fill{background:var(--gold);color:#fff}
+.menu{display:none;border:0;background:none;font-size:28px}
+
+.hero{position:relative;overflow:hidden;background:linear-gradient(105deg,#ffffff 0%,#ffffff 58%,#f3fbf6 100%);min-height:510px}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;min-height:510px}
+.hero-copy{padding:45px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;background:var(--green3);color:var(--green);font-weight:900;font-size:12px;margin-bottom:17px}
+h1{font-size:clamp(42px,5vw,72px);line-height:1.02;letter-spacing:-3px;color:var(--navy);max-width:720px}
+h1 span{color:var(--gold)}
+.hero-copy>p{font-size:18px;color:#445066;max-width:650px;margin:22px 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;padding:14px 21px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;box-shadow:0 7px 18px rgba(10,28,48,.08)}
+.btn:hover{transform:translateY(-2px)}
+.primary{background:var(--gold);color:#fff}
+.green{background:var(--green);color:#fff}
+.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #dfe4ea;border-radius:15px;padding:7px;margin-top:25px;max-width:720px;box-shadow:var(--shadow)}
+.search input,.search select{border:0;outline:0;background:#fff;color:#344055;padding:12px;min-width:0}
+.search input{flex:1}
+.search select{border-left:1px solid var(--line)}
+.search button{border:0;border-radius:11px;background:var(--gold);color:#fff;padding:12px 22px;font-weight:900}
+
+.hero-visual{height:100%;min-height:510px;position:relative;display:grid;place-items:center;overflow:hidden}
+.hero-visual::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(8,122,74,.17),transparent 65%)}
+.service-photo{position:relative;width:min(560px,92%);height:390px;border-radius:34px;overflow:hidden;box-shadow:0 28px 65px rgba(9,37,25,.18);background:
+linear-gradient(180deg,rgba(7,26,47,.02),rgba(7,26,47,.30)),
+url('https://www.landmaison.com/cdn/shop/articles/nettoyage_printemps_1.webp?v=1710498382') center/cover}
+.photo-badge{position:absolute;background:#fff;border-radius:18px;padding:15px 17px;box-shadow:0 15px 35px rgba(0,0,0,.15);font-weight:900}
+.photo-badge.one{right:-4px;top:72px}.photo-badge.two{left:-4px;bottom:48px}
+.stars{color:var(--gold);letter-spacing:2px}
+
+.popular-search{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;color:#475267}
+
+.categories{background:#fff;padding:20px 0;border-bottom:1px solid var(--line)}
+.category-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:10px}
+.category{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px 8px;text-align:center;min-height:112px;display:flex;flex-direction:column;justify-content:center;gap:7px;box-shadow:0 4px 15px rgba(18,28,40,.04);transition:.2s}
+.category:hover{transform:translateY(-3px);border-color:#cbdccf;box-shadow:var(--shadow)}
+.category .ci{font-size:28px}.category h3{font-size:12px;line-height:1.2}.category p{font-size:10px;color:var(--muted)}
+
+.section{padding:55px 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:20px}
+.section-head h2{font-size:31px;letter-spacing:-1px;color:var(--navy)}
+.section-head p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 23px rgba(15,30,45,.06);transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card-img{height:175px;background-size:cover;background-position:center;position:relative}
+.fav{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;border:0;background:#fff;box-shadow:0 5px 14px rgba(0,0,0,.12)}
+.card-body{padding:16px}
+.card h3{font-size:17px;color:var(--navy);margin-bottom:5px}
+.card p{font-size:13px;color:var(--muted)}
+.price{font-size:21px;font-weight:950;color:var(--navy);margin-top:11px}.price small{font-size:11px;font-weight:700;color:var(--muted)}
+
+.feature-strip{background:#fff;border:1px solid var(--line);border-radius:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;box-shadow:0 7px 25px rgba(15,30,45,.05)}
+.feature{padding:20px;display:flex;gap:12px;align-items:center;border-right:1px solid var(--line)}.feature:last-child{border-right:0}
+.feature-icon{width:45px;height:45px;border-radius:14px;background:var(--green3);display:grid;place-items:center;font-size:22px}.feature strong{display:block;font-size:13px}.feature span{font-size:11px;color:var(--muted)}
+
+.how{display:grid;grid-template-columns:1.15fr .85fr;gap:45px;align-items:center}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{padding:15px;border-right:1px solid var(--line)}.step:last-child{border-right:0}
+.step-num{width:27px;height:27px;border-radius:50%;background:var(--gold);color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:10px}.step h3{font-size:14px}.step p{font-size:11px;color:var(--muted);margin-top:5px}
+.app-card{background:linear-gradient(135deg,#ffffff,#f1f8f4);border:1px solid var(--line);border-radius:24px;color:var(--navy);padding:30px;min-height:240px;display:flex;align-items:center;justify-content:space-between;overflow:hidden}
+.app-card h2{font-size:29px}.app-card p{color:#c7d0dc;margin:8px 0 20px}.phone{font-size:110px;filter:drop-shadow(0 15px 25px rgba(0,0,0,.3))}
+
+.contact{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:var(--shadow)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{padding:14px;border:1px solid #dfe4ea;border-radius:13px;outline:none;width:100%;background:#fff;color:var(--navy)}.field:focus{border-color:#7bb996;box-shadow:0 0 0 3px rgba(8,122,74,.08)}.wide{grid-column:1/-1}.muted{color:var(--muted);font-size:13px}
+
+footer{background:var(--navy);color:#dbe5f1;padding:42px 0 22px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px}.footer-title{font-weight:900;color:#fff;margin-bottom:12px}.footer-grid a{display:block;margin:7px 0;color:#b9c7d9;font-size:13px}.copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:25px;padding-top:17px;font-size:11px;color:#91a2b8}
+.wa-float{position:fixed;right:20px;bottom:20px;width:57px;height:57px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;font-size:27px;z-index:80;box-shadow:0 12px 28px rgba(37,211,102,.30)}
+.detail{display:none}.detail.active{display:block}.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px}
+.modal{position:fixed;inset:0;background:rgba(4,15,40,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal.show{display:flex}.modal-box{background:#fff;border-radius:24px;max-width:650px;width:100%;padding:30px;position:relative;max-height:90vh;overflow:auto;box-shadow:0 25px 80px rgba(0,0,0,.30)}.close{position:absolute;right:15px;top:13px;border:0;background:#f1f3f6;border-radius:50%;width:37px;height:37px;font-size:20px}
+
+@media(max-width:1100px){
+ nav{display:none}.menu{display:block;margin-left:auto}.nav-actions{display:none}
+ .hero-grid{grid-template-columns:1fr}.hero-copy{text-align:center}.hero-copy>p{margin-left:auto;margin-right:auto}.actions,.search,.popular-search{justify-content:center;margin-left:auto;margin-right:auto}.hero-visual{min-height:420px}
+ .category-grid{grid-template-columns:repeat(5,1fr)}.cards{grid-template-columns:repeat(2,1fr)}.how{grid-template-columns:1fr}.feature-strip{grid-template-columns:repeat(2,1fr)}
+ .feature:nth-child(2){border-right:0}.feature:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:650px){
+ body{background:#fff!important;color:#172235!important}.hero{background:#fff!important}.categories{background:#fff!important}
+ .nav{height:67px}.logo{font-size:21px}.logo-mark{width:38px;height:38px}.hero{min-height:auto}.hero-copy{padding:32px 0}.hero-visual{min-height:330px}.service-photo{height:280px}.photo-badge{font-size:11px;padding:10px}.photo-badge.one{right:0}.photo-badge.two{left:0}
+ h1{font-size:43px;letter-spacing:-2px}.hero-copy>p{font-size:15px}.search{flex-wrap:wrap}.search input,.search select{width:100%;border:0}.search button{width:100%}
+ .category-grid{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:1fr}.feature-strip{grid-template-columns:1fr}.feature{border-right:0;border-bottom:1px solid var(--line)}.feature:last-child{border-bottom:0}
+ .steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line)}
+ .form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.footer-grid{grid-template-columns:1fr 1fr}.app-card{padding:22px}.phone{font-size:75px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#top"><div class="logo-mark">RH</div><div>ros<span>Ha</span>Ba<small>ÇÖZÜM MERKEZİ</small></div></a>
+    <nav>
+      <a href="#top">Ana Sayfa</a><a href="#services">Hizmetler</a><a href="#contact">Teklif Al</a><a href="#provider">Hizmet Ver</a><a href="#solution">Çözüm Merkezi</a>
+    </nav>
+    <div class="nav-actions"><button class="nav-btn">🛒 Sepet <span style="color:var(--gold)">0</span></button><button class="nav-btn">Giriş Yap</button><button class="nav-btn fill">Kayıt Ol</button></div>
+    <button class="menu" onclick="document.querySelector('nav').style.display=document.querySelector('nav').style.display==='flex'?'none':'flex'">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">✓ GÜVENİLİR HİZMET • TEK NOKTADA</div>
+      <h1>Hayatını Kolaylaştıran <span>Hizmetler rosHaBa’da!</span></h1>
+      <p>İhtiyacın olan her hizmet için seçenekler arasından en iyisini bul, teklif al ve güvenle hizmet al.</p>
+      <div class="actions">
+        <button class="btn green" onclick="scrollToServices()">🔎 Hizmet Ara</button>
+        <button class="btn secondary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">💬 Teklif Al</button>
+        <button class="btn secondary" onclick="openModal('provider')">♧ Hizmet Ver</button>
+      </div>
+      <div class="search">
+        <input id="searchInput" placeholder="Hizmet veya anahtar kelime">
+        <select><option>Kategori Seç</option><option>Temizlik</option><option>Tadilat</option><option>Güvenlik</option><option>Eğitim</option><option>Yoga & Wellness</option></select>
+        <span style="padding:0 7px;color:#6d7788">⌖ İzmir</span>
+        <button onclick="searchService()">Ara</button>
+      </div>
+      <div class="popular-search">
+        <span class="chip">Ev Temizliği</span><span class="chip">Tadilat</span><span class="chip">Güvenlik Sistemleri</span><span class="chip">Elektrik</span><span class="chip">Boyacı</span><span class="chip">Yoga</span><span class="chip">Özel Ders</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="service-photo">
+        <div class="photo-badge one">🛡️ Güvenilir Hizmet<br><small>Doğrulanmış sağlayıcılar</small><br><span class="stars">★★★★★</span> 4.9/5</div>
+        <div class="photo-badge two">⚡ Hızlı çözüm<br><small>İhtiyacına uygun hizmet</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories" id="services">
+ <div class="container category-grid">
+  <div class="category" onclick="showDetail('cleaning')"><span class="ci">🧹</span><h3>Ev Temizliği</h3><p>Profesyonel ekip</p></div>
+  <div class="category" onclick="showDetail('renovation')"><span class="ci">🔨</span><h3>Tadilat</h3><p>Usta hizmetleri</p></div>
+  <div class="category" onclick="showDetail('security')"><span class="ci">🛡️</span><h3>Güvenlik Sistemleri</h3><p>Kamera & alarm</p></div>
+    <div class="category"><span class="ci">🛠️</span><h3>Teknik Hizmetler</h3><p>Uzman servis</p></div>
+  <div class="category" onclick="showDetail('education')"><span class="ci">🎓</span><h3>Eğitimler</h3><p>Profesyonel eğitim</p></div>
+  <div class="category"><span class="ci">📚</span><h3>Özel Ders</h3><p>Birebir destek</p></div>
+  <div class="category"><span class="ci">🧘</span><h3>Yoga & Wellness</h3><p>İyi yaşam</p></div>
+  <div class="category" onclick="showDetail('technical')"><span class="ci" style="color:#2563eb!important;display:inline-flex;align-items:center;justify-content:center" aria-label="Dijital hizmetler">
+<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" aria-hidden="true">
+<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c3 3 3 15 0 18"></path><path d="M12 3c-3 3-3 15 0 18"></path>
+</svg></span><h3>Dijital<br>Hizmetler</h3><p>Web • Meta • Tasarım</p></div>
+  <div class="category" onclick="document.getElementById('jobs').scrollIntoView({behavior:'smooth'})"><span class="ci">👥</span><h3>İş Arayan / İş Veren</h3><p>Başvuru yap</p></div>
+  <div class="category" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"><span class="ci">•••</span><h3>Tüm Kategoriler</h3><p>Keşfet</p></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container">
+  <div class="section-head"><div><h2>Popüler Hizmetler</h2><p>İhtiyacına uygun güvenilir seçenekler</p></div><a href="#services" style="font-weight:900">Tümünü Gör →</a></div>
+  <div class="cards">
+   <article class="card"><div class="card-img" role="img" aria-label="RosHaBa hizmet görseli" style="background-image:url('https://assets-global.website-files.com/65240d174117a3efd9b5f450/65621496c7d1f8d7a30face2_welhome-france-choix-conciergerie-point-cle.webp')"><button class="fav">♡</button></div><div class="card-body"><h3>Ev Temizliği</h3><p>Profesyonel ekip ile evini temizlet.</p><div class="stars">★ 4.9 <span style="color:var(--muted);letter-spacing:0">(128)</span></div><div class="price">3.000 TL<small>'den başlar</small></div></div></article>
+   <article class="card"><div class="card-img" role="img" aria-label="RosHaBa hizmet görseli" style="background-image:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=88')"><button class="fav">♡</button></div><div class="card-body"><h3>Tadilat</h3><p>Eviniz için anahtar teslim çözümleri.</p><div class="stars">★ 4.8 <span style="color:var(--muted);letter-spacing:0">(96)</span></div><div class="price">5.000 TL<small>'den başlar</small></div></div></article>
+   <article class="card"><div class="card-img" role="img" aria-label="RosHaBa hizmet görseli" style="background-image:url('https://images.unsplash.com/photo-1558008258-3256797b43f3?auto=format&fit=crop&w=1000&q=88')"><button class="fav">♡</button></div><div class="card-body"><h3>Güvenlik Sistemleri</h3><p>Kamera ve alarm sistemleri.</p><div class="stars">★ 4.9 <span style="color:var(--muted);letter-spacing:0">(74)</span></div><div class="price">10.000 TL<small>'den başlar</small></div></div></article>
+   <article class="card"><div class="card-img" role="img" aria-label="RosHaBa hizmet görseli" style="background-image:url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=88')"><button class="fav">♡</button></div><div class="card-body"><h3>Eğitimler</h3><p>Kurslar, sertifika programları.</p><div class="stars">★ 4.8 <span style="color:var(--muted);letter-spacing:0">(91)</span></div><div class="price">5.000 TL<small>'den başlar</small></div></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="section" style="padding-top:0">
+ <div class="container feature-strip">
+  <div class="feature"><div class="feature-icon">⚡</div><div><strong>Hızlı & Kolay</strong><span>İhtiyacın olan hizmete dakikalar içinde ulaş</span></div></div>
+  <div class="feature"><div class="feature-icon">✦</div><div><strong>Teklif Al & Karşılaştır</strong><span>Birden fazla teklif al, en iyisini seç</span></div></div>
+  <div class="feature"><div class="feature-icon">🛡️</div><div><strong>Güvenli Ödeme</strong><span>Güvenli ödeme seçenekleri</span></div></div>
+  <div class="feature"><div class="feature-icon">☎</div><div><strong>7/24 Destek</strong><span>Her zaman yanınızdayız</span></div></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container how">
+  <div><div class="section-head"><div><h2>Nasıl Çalışır?</h2><p>Hizmetini birkaç adımda bul.</p></div></div>
+   <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Hizmeti Seç</h3><p>İhtiyacın olan hizmeti seç.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Teklif Al</h3><p>Hizmet verenlerden teklifler al.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Seçimini Yap</h3><p>En uygun teklifi seç.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Hizmeti Al</h3><p>Hizmet tamamlandıktan sonra değerlendir.</p></div>
+   </div>
+  </div>
+  <div class="app-card"><div><h2>rosHaBa<br>Cepte!</h2><p>Hizmetlere her yerden ulaşın.</p><button class="btn primary">Google Play'den Al</button></div><div class="phone">📱</div></div>
+ </div>
+</section>
+
+<section class="section" id="contact">
+ <div class="container contact">
+  <div class="section-head"><div><h2>Teklif / Talep Oluştur</h2><p>İhtiyacını yaz, sana uygun çözüm için iletişime geçelim.</p></div></div>
+  <form id="contactForm" class="form-grid">
+   <input class="field" id="formName" name="Ad Soyad" required placeholder="Ad Soyad">
+   <input class="field" id="formPhone" name="Telefon" required type="tel" placeholder="Telefon">
+   <input class="field wide" id="formEmail" name="E-posta" required type="email" placeholder="E-posta">
+   <textarea class="field wide" id="formMessage" name="Mesaj" rows="5" placeholder="İhtiyacınızı kısaca anlatın"></textarea>
+   <button class="btn primary wide" id="submitBtn" type="submit">Talep Gönder</button>
+   <p id="formStatus" class="muted wide" style="display:none;text-align:center"></p>
+  </form>
+ </div>
+</section>
+
+<section class="section" id="jobs">
+ <div class="container">
+  <div class="section-head"><div><h2>İş Arayan / İş Veren</h2><p>İş fırsatlarını keşfet veya ihtiyacın olan personeli bul.</p></div></div>
+  <div class="cards">
+   <div class="card"><div class="card-body"><h3>👤 İş Arıyorum</h3><p>Profilini ve iletişim bilgilerini bırak, uygun iş fırsatları için başvur.</p><br><button class="btn green" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvur</button></div></div>
+   <div class="card"><div class="card-body"><h3>🏢 İş Veriyorum</h3><p>Personel ihtiyacını bildir, uygun adaylara ulaşmak için başvuru oluştur.</p><br><button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvur</button></div></div>
+  </div>
+ </div>
+</section>
+<div id="technical" class="detail">
+  <div class="panel">
+    <div class="section-head">
+      <div>
+        <h2>🛠️ Dijital Hizmetler</h2>
+        <p>Web, Meta reklam ve dijital tasarım çözümleri.</p>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-body">
+          <h3><span style="color:#2563eb!important;display:inline-flex;vertical-align:middle;margin-right:5px" aria-hidden="true">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+<circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c3 3 3 15 0 18"></path><path d="M12 3c-3 3-3 15 0 18"></path>
+</svg></span>Web Tasarım</h3>
+          <p>Profesyonel web sitesi tasarımı ve kurulumu.</p><br>
+          <button class="btn green" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvur</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3>📣 Meta Reklam</h3>
+          <p>Instagram ve Facebook reklam kampanyalarının kurulumu ve yönetimi.</p><br>
+          <button class="btn green" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvur</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3>🎨 Dijital Tasarım</h3>
+          <p>Sosyal medya, reklam ve dijital içerik tasarımları.</p><br>
+          <button class="btn green" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvur</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="section" id="solution"><div class="container panel"><div class="section-head"><div><h2>Çözüm Merkezi</h2><p>Aradığın hizmeti bulamadın mı? İhtiyacını bize anlat.</p></div><button class="btn green" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Çözüm Talebi Oluştur</button></div></div></section>
+<section class="section" id="provider"><div class="container panel"><div class="section-head"><div><h2>Hizmet Ver</h2><p>Hizmetlerini RosHaBa üzerinden sunmak için başvur.</p></div><button class="btn primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvuru Yap</button></div></div></section>
+
+<section class="section">
+ <div class="container">
+  <div id="education" class="detail"><div class="panel"><div class="section-head"><div><h2>Kurumsal Eğitimler</h2></div></div><div class="cards"><div class="card"><div class="card-body"><h3>İlk Yardım Eğitimi</h3><p>Kurumsal ilk yardım eğitimi talebi.</p></div></div><div class="card"><div class="card-body"><h3>İş Sağlığı ve Güvenliği</h3><p>Kurumsal İSG eğitimleri.</p></div></div></div></div></div>
+  <div id="cleaning" class="detail"><div class="panel"><div class="section-head"><div><h2>Temizlik Hizmetleri</h2><p>Başlayan fiyatlarla</p></div></div><div class="cards"><div class="card"><div class="card-body"><h3>1+1</h3><div class="price">3.000 TL<small>'den başlar</small></div></div></div><div class="card"><div class="card-body"><h3>2+1</h3><div class="price">4.000 TL<small>'den başlar</small></div></div></div><div class="card"><div class="card-body"><h3>3+1</h3><div class="price">5.000 TL<small>'den başlar</small></div></div></div><div class="card"><div class="card-body"><h3>Yazlık</h3><div class="price">6.000 TL<small>'den başlar</small></div></div></div></div></div></div>
+  <div id="security" class="detail"><div class="panel"><div class="section-head"><div><h2>Güvenlik Sistemleri</h2></div></div><div class="cards"><div class="card"><div class="card-body"><h3>IP Kamera Sistemleri</h3><p>Keşif ve teklif.</p></div></div><div class="card"><div class="card-body"><h3>Alarm Sistemleri</h3><p>Keşif ve teklif.</p></div></div></div></div></div>
+  <div id="renovation" class="detail"><div class="panel"><div class="section-head"><div><h2>Tadilat</h2></div></div><div class="cards"><div class="card"><div class="card-body"><h3>Ev Tadilatı</h3></div></div><div class="card"><div class="card-body"><h3>Boya & Dekorasyon</h3></div></div></div></div></div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer-grid">
+  <div><div class="logo" style="color:#fff"><div class="logo-mark">RH</div><div>ros<span>Ha</span>Ba<small style="color:#b9c8e5">ÇÖZÜM MERKEZİ</small></div></div><p style="margin-top:14px;color:#aebdda">rosHaBa ile güvenle hizmet al, hayatını kolaylaştır!</p></div>
+  <div><div class="footer-title">Kısayollar</div><a href="#top">Ana Sayfa</a><a href="#services">Hizmetler</a><a href="#contact">Teklif Al</a><a href="#provider">Hizmet Ver</a></div>
+  <div><div class="footer-title">Yardım</div><a href="#solution">Çözüm Merkezi</a><a href="#contact">İletişim</a><a href="#services">Hizmetler</a></div>
+  <div><div class="footer-title">İletişim</div><a href="tel:+905376698901">0537 669 89 01</a><a href="mailto:roshabatr@gmail.com">roshabatr@gmail.com</a><a href="#contact">Talep Oluştur</a></div>
+ </div>
+ <div class="container copyright">© 2026 rosHaBa. Tüm hakları saklıdır.</div>
+</footer>
+<a class="wa-float" href="https://wa.me/905376698901" target="_blank" aria-label="WhatsApp">◔</a>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<script>
+function showDetail(id){
+  document.querySelectorAll('.detail').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el){el.classList.add('active');el.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function scrollToServices(){document.getElementById('services').scrollIntoView({behavior:'smooth'});}
+function searchService(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const map=[
+    ['temiz','cleaning'],['ofis','cleaning'],['ev temiz','cleaning'],
+    ['medikal','medical'],['tansiyon','medical'],['oksimet','medical'],['nebul','medical'],
+    ['güven','security'],['kamera','security'],['alarm','security'],
+    ['tadil','renovation'],['eğitim','education'],['ilk yardım','education'],
+    ['iş','jobs'],['personel','jobs'],['web','digital'],['meta','digital'],['reklam','digital']
+  ];
+  const found=map.find(x=>q.includes(x[0]));
+  if(found){showDetail(found[1]);return;}
+  if(q){
+    openModal('request',`<h2>Çözüm Talebi</h2><p style="margin:12px 0;color:#aebbd0">“${q}” için talebinizi bize iletin.</p><button class="btn primary" onclick="closeModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Talep Oluştur</button>`);
+  }
+}
+function openModal(type,custom){
+  const c=document.getElementById('modalContent');
+  if(custom)c.innerHTML=custom;
+  else if(type==='provider'){
+    c.innerHTML=`<h2>Hizmet Ver</h2><p style="margin:12px 0;color:#aebbd0">Hizmetlerinizi RosHaBa üzerinden sunmak için başvurun.</p><button class="btn primary" onclick="closeModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başvuru Yap</button>`;
+  }else if(type==='request'){
+    c.innerHTML=`<h2>Çözüm Talebi</h2><p style="margin:12px 0;color:#aebbd0">İhtiyacınızı bize anlatın, size uygun çözümü birlikte belirleyelim.</p><button class="btn primary" onclick="closeModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Talep Oluştur</button>`;
+  }else if(type==='jobseeker'){
+    c.innerHTML=`<h2>İş Arıyorum</h2><p style="margin:12px 0;color:#aebbd0">CV ve iletişim bilgilerinizi bırakmak için iletişim formuna geçebilirsiniz.</p><button class="btn primary" onclick="closeModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Başla</button>`;
+  }else{
+    c.innerHTML=`<h2>Personel Arıyorum</h2><p style="margin:12px 0;color:#aebbd0">Personel ihtiyacınızı bize iletin.</p><button class="btn primary" onclick="closeModal();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">İlan Talebi</button>`;
+  }
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+
+const contactForm = document.getElementById('contactForm');
+if(contactForm){
+  contactForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('formName').value.trim();
+    const phone = document.getElementById('formPhone').value.trim();
+    const email = document.getElementById('formEmail').value.trim();
+    const message = document.getElementById('formMessage').value.trim();
+    const status = document.getElementById('formStatus');
+    const button = document.getElementById('submitBtn');
+
+    const whatsappText =
+      `RosHaBa Yeni Talep%0A%0A` +
+      `Ad Soyad: ${encodeURIComponent(name)}%0A` +
+      `Telefon: ${encodeURIComponent(phone)}%0A` +
+      `E-posta: ${encodeURIComponent(email)}%0A` +
+      `Mesaj: ${encodeURIComponent(message || 'Belirtilmedi')}`;
+
+    // WhatsApp'ta mesajı hazırlar.
+    window.open(`https://wa.me/905376698901?text=${whatsappText}`, '_blank');
+
+    button.disabled = true;
+    button.textContent = 'Gönderiliyor...';
+    status.style.display = 'block';
+    status.textContent = 'Talebiniz gönderiliyor...';
+
+    try{
+      // GitHub Pages üzerinde çalışan statik site için FormSubmit ile e-posta gönderimi.
+      const response = await fetch('https://formsubmit.co/ajax/roshabatr@gmail.com', {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          'Ad Soyad': name,
+          'Telefon': phone,
+          'E-posta': email,
+          'Mesaj': message || 'Belirtilmedi',
+          '_subject': 'RosHaBa Yeni Talep',
+          '_captcha': 'false',
+          '_template': 'table'
+        })
+      });
+
+      if(!response.ok) throw new Error('E-posta gönderimi başarısız.');
+
+      status.textContent = 'Talebiniz alındı. WhatsApp ve e-posta bildirimi hazırlandı.';
+      status.style.color = '#7ce7ff';
+      contactForm.reset();
+    }catch(error){
+      console.error(error);
+      status.textContent = 'WhatsApp mesajı hazırlandı; e-posta gönderiminde sorun oluştu. FormSubmit onayını kontrol edin.';
+      status.style.color = '#f4d58a';
+    }finally{
+      button.disabled = false;
+      button.textContent = 'Talep Gönder';
+    }
+  });
+}
+
+</script>
+</body>
+</html>
